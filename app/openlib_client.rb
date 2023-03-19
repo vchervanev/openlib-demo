@@ -20,9 +20,7 @@ class OpenlibClient
     def search(title:, limit: 10, fields: DEFAULT_FIELDS)
       return INVALID_ARGS if title.strip.to_s == ''
 
-      uri = URI(URL)
-      uri.query = URI.encode_www_form(title:, limit:, fields:)
-      response = Net::HTTP.get_response(uri)
+      response = get(title:, limit:, fields:)
       if response.code != '200'
         puts(message: 'non 200 GET response', code: response.code, body: response.body)
         return INVALID_RESPONSE
@@ -35,6 +33,14 @@ class OpenlibClient
     end
 
     private
+
+    def get(query = {})
+      uri = URI(URL).tap do |request|
+        request.query = URI.encode_www_form(query)
+      end
+
+      Net::HTTP.get_response(uri)
+    end
 
     def parse_search_response(body)
       json = JSON.parse(body, symbolize_names: true)
@@ -51,15 +57,10 @@ class OpenlibClient
     end
 
     def valid_schema?(json)
-      return false unless json.is_a?(Hash) && json.key?(:docs)
+      return false unless json.is_a?(Hash) && json[:docs].is_a?(Array)
 
-      docs = json[:docs]
-      return false unless docs.is_a? Array
-
-      docs.all? do |rec|
-        next false unless rec.is_a? Hash
-
-        SCHEMA.each do |key, validator|
+      json[:docs].all? do |rec|
+        rec.is_a?(Hash) && SCHEMA.each do |key, validator|
           rec.key?(key) && validator.call(rec[key])
         end
       end

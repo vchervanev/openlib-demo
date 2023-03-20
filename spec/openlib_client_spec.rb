@@ -29,8 +29,16 @@ RSpec.describe OpenlibClient do
     end
   end
 
-  context 'invalid params' do
+  context 'empty params' do
     let(:title) { '  ' }
+
+    it 'returns INVALID_ARGS' do
+      expect(search).to eq(described_class::INVALID_ARGS)
+    end
+  end
+
+  context 'missing params' do
+    let(:title) { nil }
 
     it 'returns INVALID_ARGS' do
       expect(search).to eq(described_class::INVALID_ARGS)

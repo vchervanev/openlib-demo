@@ -18,7 +18,7 @@ class OpenlibClient
 
   class << self
     def search(title:, limit: 10, fields: DEFAULT_FIELDS)
-      return INVALID_ARGS if title.strip.to_s == ''
+      return INVALID_ARGS if title&.strip.to_s == ''
 
       response = get(title:, limit:, fields:)
       if response.code != '200'

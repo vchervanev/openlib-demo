@@ -14,10 +14,8 @@ get '/' do
 end
 
 get '/search' do
-  title = params[:title]
-  result = OpenlibService.search(title:)
-  result.to_json
+  OpenlibService.search(title: params[:title]).to_json
 rescue StandardError => e
   puts(message: 'Failed /search', error: e.detailed_message, trace: e.backtrace)
-  [500, { success: false, error: 'Internal Server Error' }]
+  [500, { success: false, error: 'Internal Server Error' }.to_json]
 end

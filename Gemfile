@@ -9,6 +9,8 @@ gem 'puma', '~> 6.1'
 gem 'haml', '~> 6.1'
 
 group :test do
+  gem 'capybara', '~> 3.38'
+
   gem 'rack-test', '~> 2.1'
 
   gem 'rspec', '~> 3.12'

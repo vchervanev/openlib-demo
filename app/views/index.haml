@@ -1,3 +1,33 @@
 !!!
-%html{lang:'en'}
-  %h OpenLib Example
+%html{lang: 'en'}
+  %head
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}
+    %meta{charset: 'utf-8'}
+    %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
+    %meta{content: 'width=device-width, initial-scale=1', name: 'viewport'}
+    %title OpenLibrary Search
+    %link{href: '/css/bootstrap.min.css', rel: 'stylesheet'}
+    %link{href: '/css/grid.css', rel: 'stylesheet'}
+  %body
+    %section.intro
+      .container
+        .row
+        .row
+          %form#search-form
+            .form-group
+              %label{for: "search"} Enter Book Name
+              %input#search-title.form-control{type: "text"}
+              %button.btn.btn-primary{type: "submit"} Search
+        .row.justify-content-center
+          .col-12
+            .table-responsive.bg-white
+              %table.table.mb-0
+                %thead
+                  %tr
+                    %th Book Title
+                    %th Author
+                    %th Link to Open Library Page
+                %tbody#search-result
+                  %tr
+                    %td Use Search to find books
+  %script{src: '/js/search.js'}

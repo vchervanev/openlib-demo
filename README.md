@@ -19,5 +19,31 @@ bundle exec rspec
 ## Deployment
 The app is deployed to https://openlib-demo.herokuapp.com/ via Heroku's pipeline.
 
+## API Format
+
+Sample request:
+* https://openlib-demo.herokuapp.com/search?title=abba
+
+Response:
+
+```json
+{
+  "success": true,
+  "payload": [
+    {
+      "title": "Abba Abba",
+      "authors": "Anthony Burgess",
+      "link": "https://openlibrary.org/works/OL1386723W"
+    },
+    {
+      "title": "ABBA Gold - Greatest Hits",
+      "authors": "ABBA",
+      "link": "https://openlibrary.org/works/OL26541836W"
+    },
+    ...
+  ]
+}
+```
+
 ## Screenshots
 <img width="879" alt="image" src="https://user-images.githubusercontent.com/8615227/226424075-26530985-ff4d-41b0-80e2-78bffcf759da.png">

@@ -2,7 +2,6 @@
 
 require 'sinatra'
 require 'haml'
-require 'JSON'
 require 'net/http'
 
 require './app/openlib_client'

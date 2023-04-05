@@ -1,5 +1,7 @@
 # Open Library Integration Demo
 
+See [Sample Design Document](DESIGN.md)
+
 ## Local Development
 
 ```
